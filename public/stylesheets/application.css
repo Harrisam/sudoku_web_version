@@ -17,3 +17,11 @@ div.box, div.cell {
 	width: 30px;
 	height: 30px;
 }
+
+.incorrect {
+	background-colour: yellow;
+}
+
+.value-provided {
+	background-color: #DDD
+}
