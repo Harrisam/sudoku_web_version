@@ -1,13 +1,13 @@
 require 'sinatra'
 require 'sinatra/partial'
-set :partial_template_engine, :erb # load sinatra
 require 'rack-flash'
-use Rack::Flash
 require './lib/cell'
 require './lib/sudoku'
 
-
+use Rack::Flash
 enable :sessions #sessions are disabled by default
+set :session_secret, "Hiya"
+set :partial_template_engine, :erb # load sinatra
 
 def random_sudoku
 	#we're using 9 numbers, 1 to 9, and 72 zeros as an input
@@ -88,10 +88,13 @@ get '/last-visit' do
 end
 
 post '/' do
-	cells = params["cell"]
-	session[:current_solution] = cells.map{|value| value.to_i }.join
-	session[:check_solution] = true
-	redirect to('/')
+  boxes = params["cell"].each_slice(9).to_a
+  cells = (0..8).to_a.inject([]) {|memo, i|
+    memo += boxes[i/3*3, 3].map{|box| box[i%3*3, 3] }.flatten
+  }
+  session[:current_solution] = cells.map{|value| value.to_i }.join
+  session[:check_solution] = true
+  redirect to("/")
 end
 
 helpers do
