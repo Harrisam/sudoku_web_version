@@ -3,6 +3,7 @@ body {
 	text-align: center;
 	font-family: Arial;
 	background: purple;
+	color: white;
 }
 
 
@@ -10,9 +11,11 @@ h1{
      font-size: 3em;
      font-weight: 800;
      font-family: Helvetica;
-     color: white;
 }
 
+#flash {
+	margin: 80px;
+}
 
 #sudoku {
 	font-size: 0;
@@ -24,6 +27,8 @@ div.box, div.cell {
 	display: 
 }
 
+
+
 .cell input {
 	width: 30px;
 	height: 30px;
@@ -32,6 +37,7 @@ div.box, div.cell {
 
 .incorrect {
 	background-color: purple;
+	color: white;
 }
 
 .value-provided {

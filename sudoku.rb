@@ -1,6 +1,8 @@
 require 'sinatra'
 require 'sinatra/partial'
 set :partial_template_engine, :erb # load sinatra
+require 'rack-flash'
+use Rack::Flash
 require './lib/cell'
 require './lib/sudoku'
 
@@ -21,7 +23,7 @@ end
 #this method removes some digits from the solution to create a puzzle
 def puzzle(sudoku)
 	# this method is yours to implement
-	random = (0..81).to_a.sample(10)
+	random = (0..81).to_a.sample(15)
 	@puzzled = []
 	sudoku.each_with_index do |element,index|
 		if random.include?(index) then @puzzled.push(0)
@@ -40,6 +42,9 @@ end
 
 def prepare_to_check_solution
 	@check_solution = session[:check_solution]
+	if @check_solution
+		flash[:notice] = "Incorrect values are highlighted in purple"
+	end
 	session[:check_solution] = nil
 end
 
