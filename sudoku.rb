@@ -1,4 +1,6 @@
-require 'sinatra' # load sinatra
+require 'sinatra'
+require 'sinatra/partial'
+set :partial_template_engine, :erb # load sinatra
 require './lib/cell'
 require './lib/sudoku'
 
@@ -19,7 +21,13 @@ end
 #this method removes some digits from the solution to create a puzzle
 def puzzle(sudoku)
 	# this method is yours to implement
-	sudoku
+	random = (0..81).to_a.sample(10)
+	@puzzled = []
+	sudoku.each_with_index do |element,index|
+		if random.include?(index) then @puzzled.push(0)
+		else @puzzled.push(element) end 
+		end 
+	@puzzled 
 end
 
 def generate_new_puzzle_if_necessary
@@ -58,12 +66,13 @@ get'/' do
 	@current_solution = session[:current_solution] || session[:puzzle]
 	@solution = session[:solution]
 	@puzzle = session[:puzzle]
-	
 	erb :index
 end
 
 get '/solution' do
 	@current_solution = session[:solution]
+	@solution = session[:solution]
+	@puzzle = session[:puzzle]
 	erb :index
 end
 
@@ -77,7 +86,7 @@ post '/' do
 	cells = params["cell"]
 	session[:current_solution] = cells.map{|value| value.to_i }.join
 	session[:check_solution] = true
-	redirect to("/")
+	redirect to('/')
 end
 
 helpers do
