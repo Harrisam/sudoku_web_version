@@ -2,7 +2,17 @@
 body {
 	text-align: center;
 	font-family: Arial;
+	background: purple;
 }
+
+
+h1{
+     font-size: 3em;
+     font-weight: 800;
+     font-family: Helvetica;
+     color: white;
+}
+
 
 #sudoku {
 	font-size: 0;
@@ -11,15 +21,17 @@ body {
 
 div.box, div.cell {
 	display: inline-block;
+	display: 
 }
 
 .cell input {
 	width: 30px;
 	height: 30px;
+	text-align: center;
 }
 
 .incorrect {
-	background-colour: yellow;
+	background-color: purple;
 }
 
 .value-provided {
