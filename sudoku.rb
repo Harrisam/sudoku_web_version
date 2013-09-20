@@ -66,16 +66,16 @@ def box_order_to_row_order(cells)
 	end
 end
 
-get '/random' do 
-	sudoku = random_sudoku
-	prepare_to_check_solution
-	generate_new_puzzle_if_necessary
-	session[:solution] = sudoku
-	@current_solution = puzzle(sudoku)
-	@solution = session[:solution]
-	@puzzle = session[:puzzle]
-	erb :index
-end
+# get '/random' do 
+# 	sudoku = random_sudoku
+# 	prepare_to_check_solution
+# 	generate_new_puzzle_if_necessary
+# 	session[:solution] = sudoku
+# 	@current_solution = puzzle(sudoku)
+# 	@solution = session[:solution]
+# 	@puzzle = session[:puzzle]
+# 	erb :index
+# end
 
 get '/time' do
   # save the current time into session
@@ -83,7 +83,7 @@ get '/time' do
   "Last visit time has been recorded"
 end 
 
-get'/' do
+get '/' do
 	prepare_to_check_solution
 	generate_new_puzzle_if_necessary
 	@current_solution = session[:current_solution] || session[:puzzle]
