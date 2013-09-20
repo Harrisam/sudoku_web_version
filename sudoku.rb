@@ -9,6 +9,10 @@ enable :sessions #sessions are disabled by default
 set :session_secret, "Hiya"
 set :partial_template_engine, :erb # load sinatra
 
+configure :production do
+	require 'newrelic_rpm'
+end
+
 def random_sudoku
 	#we're using 9 numbers, 1 to 9, and 72 zeros as an input
 	#it's obvious there may be no clashes as all numbers are unique
