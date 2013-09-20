@@ -106,6 +106,16 @@ get '/last-visit' do
 	session[:last_visit] = nil
 end
 
+get '/reset' do
+	session[:solution] = nil
+	session[:puzzle] = nil
+	session[:current_solution] = nil
+	session[:check_solution] = nil 
+	session[:last_visit] = nil
+	redirect to("/")
+end
+
+
 post '/' do
   boxes = params["cell"].each_slice(9).to_a
   cells = (0..8).to_a.inject([]) {|memo, i|
