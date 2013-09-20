@@ -93,6 +93,7 @@ get'/' do
 end
 
 get '/solution' do
+	redirect to("/") if session[:solution].nil?
 	@current_solution = session[:solution]
 	@solution = session[:solution]
 	@puzzle = session[:puzzle]
@@ -108,7 +109,7 @@ end
 post '/' do
   boxes = params["cell"].each_slice(9).to_a
   cells = (0..8).to_a.inject([]) {|memo, i|
-    memo += boxes[i/3*3, 3].map{|box| box[i%3*3, 3] }.flatten
+  memo += boxes[i/3*3, 3].map{|box| box[i%3*3, 3] }.flatten
   }
   session[:current_solution] = cells.map{|value| value.to_i }.join
   session[:check_solution] = true

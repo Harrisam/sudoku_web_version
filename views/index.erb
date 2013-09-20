@@ -10,7 +10,7 @@
 	<%=flash[:notice] %>
 </div>
 <div id="sudoku">
-<form action="/" method="POST">	
+<form id="check" action="/" method="POST">	
 	<!-- one div for each row -->
 		<% 3.times do |row| %>
 			<div class='row'>
@@ -38,3 +38,4 @@
 </div>
 </body>
 </html>
+
